@@ -10,7 +10,7 @@ export default function Navbar() {
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
-                    <Link class="navbar-brand" to="/">
+                    <Link className="navbar-brand" to="/">
                        {/*  <img src="" alt="" width="30" height="24" class="d-inline-block align-text-top" /> */}<SlNotebook />
                         My Notebook
                     </Link>
