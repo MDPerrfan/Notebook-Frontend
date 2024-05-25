@@ -8,7 +8,7 @@ export default function Navbar() {
     },[location])
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-light">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <Link class="navbar-brand" to="/">
                        {/*  <img src="" alt="" width="30" height="24" class="d-inline-block align-text-top" /> */}<SlNotebook />
