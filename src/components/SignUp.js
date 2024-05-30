@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export default function SignUp() {
+export default function SignUp(props) {
     const [credentials, setCredentials] = useState({ email: "", password: "",name:"",cpassword:""});
     const navigate = useNavigate();
 
@@ -33,18 +33,23 @@ export default function SignUp() {
             const json = await response.json();
             console.log(json);
 
-            if (json.success) {
+            if (!json.success) {
+                if (json.error === "Email already exists!") {
+                    props.showAlert("User already exists", "danger");
+                } else {
+                    props.showAlert("An error occurred. Please try again.", "danger");
+                }
+            } else {
                 // Save the auth token
                 localStorage.setItem('token', json.authtoken);
-
-                // Redirect to home page
-                navigate("/login"); // Use navigate to redirect the user to the home page
-            } else {
-                alert("Invalid credentials");
+    
+                // Redirect to login page
+                navigate("/login");
+                props.showAlert("Successfully created your account!", "success");
             }
         } catch (error) {
             console.error("Error during Signup:", error);
-            alert("An error occurred. Please try again.");
+            props.showAlert("An error occurred. Please try again.", "danger");
         }
     }
     const onChange = (e) => {
