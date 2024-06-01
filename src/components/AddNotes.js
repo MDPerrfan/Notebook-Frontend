@@ -8,7 +8,7 @@ export default function AddNotes() {
 
   const handleOnclick = (e) => {
     e.preventDefault(); // Prevent default form submission
-    addNote(note.title,note.description,note.description);
+    addNote(note.title, note.description, note.tag); // Corrected tag argument
     setNote({ title: "", description: "", tag: "" }); // Reset the form after submission
   };
 
