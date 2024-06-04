@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { SlNotebook } from "react-icons/sl";
+import { useNavigate } from 'react-router-dom';
+
 export default function Navbar() {
+    const navigate = useNavigate()
     let location = useLocation();
     useEffect(() => {
 
     }, [location])
+    const handleLogout=()=>{
+        localStorage.removeItem('token')
+        navigate('/login')
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -26,10 +33,14 @@ export default function Navbar() {
                                 <Link className={`nav-link ${location.pathname === '/about' ? "active" : ""}`} to="/about">About</Link>
                             </li>
                         </ul>
+                        {localStorage.getItem('token') ? (
+                        <button className='btn btn-outline-danger' onClick={handleLogout}>Logout</button>
+                    ) : (
                         <form className="d-flex">
                             <Link className="btn btn-primary mx-2" to="/login" role="button">Login</Link>
                             <Link className="btn btn-primary mx-2" to="/signup" role="button">Signup</Link>
                         </form>
+                    )}
                     </div>
 
                 </div>

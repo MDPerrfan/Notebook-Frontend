@@ -3,7 +3,10 @@ import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
   const host = "http://127.0.0.1:5000"
-  const notesInitial = []
+  const notesInitial= {
+    notes: [],
+    // other state variables...
+};
   const [notes, setNotes] = useState(notesInitial)
 
   // Get all Notes
@@ -13,7 +16,7 @@ const NoteState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY1NDVlZGUyMzdmMDc3MjY1ZDFiOGRlIn0sImlhdCI6MTcxNjgwNTM0Mn0.Jd58iAVdoS5OQuL7CnN-KJuO3zNAxPaObOxRIMDv6AA"
+        "auth-token": localStorage.getItem('token')
       }
     });
     const json = await response.json()
@@ -26,7 +29,7 @@ const NoteState = (props) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY1NDVlZGUyMzdmMDc3MjY1ZDFiOGRlIn0sImlhdCI6MTcxNjgwNTM0Mn0.Jd58iAVdoS5OQuL7CnN-KJuO3zNAxPaObOxRIMDv6AA"
+      "auth-token": localStorage.getItem('token')
     },
     body: JSON.stringify({ title, description, tag })
   });
@@ -41,7 +44,7 @@ const NoteState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY1NDVlZGUyMzdmMDc3MjY1ZDFiOGRlIn0sImlhdCI6MTcxNjgwNTM0Mn0.Jd58iAVdoS5OQuL7CnN-KJuO3zNAxPaObOxRIMDv6AA"
+        "auth-token": localStorage.getItem('token')
       }
     });
     const newNotes = notes.filter(note => note._id !== id);
@@ -56,7 +59,7 @@ const NoteState = (props) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY1NDVlZGUyMzdmMDc3MjY1ZDFiOGRlIn0sImlhdCI6MTcxNjgwNTM0Mn0.Jd58iAVdoS5OQuL7CnN-KJuO3zNAxPaObOxRIMDv6AA"
+        "auth-token": localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag })
     });
@@ -78,7 +81,7 @@ const NoteState = (props) => {
   }
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes }}>
+    <NoteContext.Provider value={{notes, addNote, deleteNote, editNote, getNotes }}>
       {props.children}
     </NoteContext.Provider>
   );
