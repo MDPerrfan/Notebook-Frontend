@@ -3,25 +3,38 @@ import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
   const host = "http://127.0.0.1:5000"
-  const notesInitial= {
-    notes: [],
-    // other state variables...
-};
+  const notesInitial= [];
   const [notes, setNotes] = useState(notesInitial)
 
   // Get all Notes
   const getNotes = async () => {
-    // API Call 
-    const response = await fetch(`${host}/api/notes/fetchallnotes`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error("No token found in localStorage.");
+      return;
+    }
+    try {
+      const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': token // Use the retrieved token variable
+          // Or 'Authorization': `Bearer ${token}` if that's what your backend expects
+        }
+      });
+  
+      if (response.status === 401) {
+        console.error("Unauthorized: Invalid or expired token.");
+        return;
       }
-    });
-    const json = await response.json()
-    setNotes(json)
-  }
+  
+      const json = await response.json();
+      setNotes(json);
+    } catch (error) {
+      console.error("Error fetching notes:", error);
+    }
+  };
+  
  // Add a Note
  const addNote = async (title, description, tag) => {
   // API Call 

@@ -6,40 +6,41 @@ const Login = (props) => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        // Validate the credentials
-        if (credentials.email === "" || credentials.password === "") {
-            alert("Email and password cannot be empty");
-            return;
-        }
-
-        try {
-            const response = await fetch("http://localhost:5000/api/auth/login", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email: credentials.email, password: credentials.password })
-            });
-
-            const json = await response.json();
-            console.log(json);
-
-            if (json.success) {
-                // Save the auth token
-                localStorage.setItem('token', json.authtoken);
-
-                // Redirect to home page
-                navigate("/"); // Use navigate to redirect the user to the home page
-            } else {
-                props.showAlert("Invalid Email or Password!","danger");
-            }
-        } catch (error) {
-            console.error("Error during login:", error);
-            props.showAlert("An error occurred. Please try again.","danger");
-        }
+    // Validate the credentials
+    if (credentials.email === "" || credentials.password === "") {
+        alert("Email and password cannot be empty");
+        return;
     }
+
+    try {
+        const response = await fetch("http://127.0.0.1:5000/api/auth/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: credentials.email, password: credentials.password })
+        });
+
+        const json = await response.json();
+        console.log("Login response:", json); // Log the complete response
+
+        if (json.success) {
+            // Save the auth token
+            localStorage.setItem('token', json.authToken);
+            console.log("Stored Token:", localStorage.getItem('token'));
+
+            // Redirect to home page
+            navigate("/"); // Use navigate to redirect the user to the home page
+        } else {
+            props.showAlert("Invalid Email or Password!", "danger");
+        }
+    } catch (error) {
+        console.error("Error during login:", error);
+        props.showAlert("An error occurred. Please try again.", "danger");
+    }
+}
 
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
