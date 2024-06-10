@@ -7,12 +7,13 @@ import AddNotes from './AddNotes';
 
 const Notes = ({ showAlert }) => {
     const context = useContext(noteContext);
-    const { notes, getNotes, editNote } = context;
+    const { notes, getNotes, editNote,getUsername,name} = context;
     const navigate = useNavigate();
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
             getNotes();
+            getUsername();
         } else {
             navigate('/login');
         }
@@ -100,8 +101,8 @@ const Notes = ({ showAlert }) => {
             </div>
             <div className="container">
                 <div className="row my-3">
-                    <h2>Your Notes</h2>
-                    <div className="container mx-2">
+                <h3 className='coral'>{name ? `${name}'s Notes` : 'Your Notes'}</h3> {/* Display username if available */}
+                <div className="container mx-2">
                         {notes.length === 0 && 'No notes to display'}
                     </div>
                     {notes.map((note) => {

@@ -5,7 +5,35 @@ const NoteState = (props) => {
   const host = "http://127.0.0.1:5000"
   const notesInitial= [];
   const [notes, setNotes] = useState(notesInitial)
+  const [name, setName] = useState("");
 
+  // Get current username
+  const getUsername = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("No token found in localStorage.");
+      return;
+    }
+    try {
+      const response = await fetch(`${host}/api/auth/getuser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": token,
+        },
+      });
+
+      if (response.status === 401) {
+        console.error("Unauthorized: Invalid or expired token.");
+        return;
+      }
+
+      const json = await response.json();
+      setName(json.name);
+    } catch (error) {
+      console.error("Error fetching username:", error);
+    }
+  };
   // Get all Notes
   const getNotes = async () => {
     const token = localStorage.getItem('token');
@@ -94,7 +122,7 @@ const NoteState = (props) => {
   }
 
   return (
-    <NoteContext.Provider value={{notes, addNote, deleteNote, editNote, getNotes }}>
+    <NoteContext.Provider value={{notes, addNote, deleteNote, editNote, getNotes,name,getUsername }}>
       {props.children}
     </NoteContext.Provider>
   );

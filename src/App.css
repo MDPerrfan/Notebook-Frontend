@@ -2,6 +2,10 @@
     color: rgb(255, 80, 80);
 }
 
+* {
+    font-family: "Sofia", sans-serif;
+}
+
 .about-section {
     min-height: 88vh;
 }
@@ -15,6 +19,7 @@
 
 .container-main {
     min-height: 88vh;
+    background-color: aliceblue;
 }
 
 .footer-copywright {
@@ -56,6 +61,7 @@
 }
 
 .alert-container {
+    background: aliceblue !important;
     display: flex;
     justify-content: center;
     position: fixed;

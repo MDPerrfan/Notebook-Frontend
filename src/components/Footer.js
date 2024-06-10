@@ -16,9 +16,9 @@ function Footer(props) {
   return (
     <Container fluid className="footer" style={{ background: props.mode === 'dark' ? 'rgb(43, 48, 53)' : 'rgb(246, 246, 250)', color: textColor }}>
       <Row>
-        <Col md="4" className="footer-copywright">
+{        <Col md="4" className="footer-copywright">
           <h3>Designed and Developed by <span className="coral">Parves</span></h3>
-        </Col>
+        </Col>}
         <Col md="4" className="footer-copywright">
           <h3>Copyright © {year}</h3>
         </Col>

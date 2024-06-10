@@ -29,18 +29,19 @@ function App() {
       <NoteState>
         <Router>
           <Navbar />
-          <div className="alert" style={{ height: "40px" }}>
-            <Alert alert={alert} />
-          </div>
           <div className="container-main">
+            <div className="alert" style={{ height: "40px" }}>
+              <Alert alert={alert} />
+            </div>
             <Routes>
               <Route path="/about" element={<About />} />
               <Route path="/" element={<Home showAlert={showAlert} />} />
               <Route path="/login" element={<Login showAlert={showAlert} />} />
               <Route path="/signup" element={<SignUp showAlert={showAlert} />} />
             </Routes>
+            <Footer />
           </div>
-          <Footer />
+
         </Router>
       </NoteState>
     </>

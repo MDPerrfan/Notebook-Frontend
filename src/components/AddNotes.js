@@ -23,7 +23,7 @@ export default function AddNotes({ showAlert }) {
 
   return (
     <div className="container my-5">
-      <h3>ADD YOUR NOTES HERE</h3>
+      <h3 className='coral'>ADD YOUR NOTES HERE</h3>
       <form>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">Title</label>
