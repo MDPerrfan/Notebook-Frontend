@@ -60,7 +60,7 @@ export default function AddNotes({ showAlert }) {
             onChange={onChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleOnclick}>Add Note</button>
+        <button type="submit" className="btn btn-outline-success" onClick={handleOnclick}>Add Note</button>
       </form>
     </div>
   );

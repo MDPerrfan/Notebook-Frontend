@@ -10,6 +10,10 @@
     min-height: 88vh;
 }
 
+.login {
+    min-height: 83vh;
+}
+
 .footer {
     /* background-color: rgb(246, 246, 250); */
     bottom: 0 !important;

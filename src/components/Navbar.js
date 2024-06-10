@@ -37,8 +37,8 @@ export default function Navbar() {
                         <button className='btn btn-outline-danger' onClick={handleLogout}>Logout</button>
                     ) : (
                         <form className="d-flex">
-                            <Link className="btn btn-primary mx-2" to="/login" role="button">Login</Link>
-                            <Link className="btn btn-primary mx-2" to="/signup" role="button">Signup</Link>
+                            <Link className="btn btn-outline-primary mx-2" to="/login" role="button">Login</Link>
+                            <Link className="btn btn-outline-info mx-2" to="/signup" role="button">Signup</Link>
                         </form>
                     )}
                     </div>
