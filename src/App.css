@@ -1,3 +1,18 @@
+.main_container {
+    display: flex;
+    flex-direction: column;
+    min-height: 96vh;
+    /* This ensures the container takes up at least the full height of the viewport */
+}
+
+
+/* This should be the container for your main content */
+
+.content {
+    flex: 1;
+    /* This makes sure the content takes up all available space */
+}
+
 .coral {
     color: rgb(255, 80, 80);
 }
