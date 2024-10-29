@@ -17,7 +17,7 @@ const Notes = ({ showAlert }) => {
         } else {
             navigate('/login');
         }
-    }, []);
+    }, [getNotes, getUsername, navigate]);
 
     const ref = useRef(null);
     const refClose = useRef(null);
