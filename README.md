@@ -1,5 +1,3 @@
-Here’s a README template for your **Notebook Website** project, where users can create accounts and store their notes.
-
 ```markdown
 # Notebook Website
 
